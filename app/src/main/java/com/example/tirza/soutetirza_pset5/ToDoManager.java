@@ -52,9 +52,6 @@ class ToDoManager {
         return index;
     }
 
-    /** Reads the To Do Lists */
-
-
     /** Creates a string that holds all the information about the user's To Do Lists*/
     private String createManagerString() {
         toDoLists = getToDoManager();
