@@ -1,19 +1,23 @@
+/*
+ * Native App Studio: Assignment 5
+ * Many To Do Lists
+ * Tirza Soute
+ *
+ * This file extends the ArrayAdapter<String> to be able to show colours and check items off.
+ */
+
+
 package com.example.tirza.soutetirza_pset5;
 
 import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-
-/**
- * Created by tirza on 2-12-16.
- */
 
 class CustomAdapter extends ArrayAdapter<String> {
     private ToDoList toDoList;

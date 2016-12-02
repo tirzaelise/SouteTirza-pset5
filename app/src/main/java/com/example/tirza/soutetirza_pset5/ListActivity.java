@@ -1,4 +1,3 @@
-
 /*
  * Native App Studio: Assignment 5
  * Many To Do Lists
@@ -13,7 +12,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -43,8 +42,10 @@ public class ListActivity extends AppCompatActivity {
             clickedList = extras.getString("clickedList");
             TextView titleView = (TextView) findViewById(R.id.listTitle);
             titleView.setText(clickedList);
+            titleView.setGravity(Gravity.CENTER_HORIZONTAL);
 
             getClickedList();
+            toDoManager.readToDoLists(this);
             final ListView toDoList = (ListView) findViewById(R.id.toDoLists);
             setListView(toDoList);
 
@@ -97,6 +98,7 @@ public class ListActivity extends AppCompatActivity {
 
             if (title.equals(clickedList)) {
                 currentList = currentToDoList.getToDoList();
+                break;
             }
         }
     }
@@ -129,9 +131,11 @@ public class ListActivity extends AppCompatActivity {
             currentList.add(newToDoItem);
             int index = toDoManager.getListIndex(clickedList);
             ArrayList<ToDoList> toDoLists = toDoManager.getToDoManager();
+
             currentToDoList.setToDoList(currentList);
             toDoLists.set(index, currentToDoList);
             toDoManager.setToDoManager(toDoLists);
+            toDoManager.writeToDoList(this);
 
             adapter.add(newTask);
             adapter.notifyDataSetChanged();
@@ -153,12 +157,9 @@ public class ListActivity extends AppCompatActivity {
         int listIndex = toDoManager.getListIndex(clickedList);
         toDoLists.set(listIndex, currentToDoList);
         toDoManager.setToDoManager(toDoLists);
+        toDoManager.writeToDoList(this);
 
         adapter.remove(selectedItem);
         adapter.notifyDataSetChanged();
-    }
-
-    public void writeTask(String newTask) {
-
     }
 }
